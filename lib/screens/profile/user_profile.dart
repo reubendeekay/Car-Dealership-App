@@ -34,7 +34,7 @@ class _UserProfileState extends State<UserProfile> {
   String phoneNumber = '';
   String nationalId = '123';
   String dateofBirth = '';
-  String postal = '';
+  bool isAdmin;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -45,13 +45,15 @@ class _UserProfileState extends State<UserProfile> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.grey[50],
+          backgroundColor: Colors.transparent,
           elevation: 0,
           leading: GestureDetector(
               onTap: () => widget.isFromDrawer != null
                   ? ZoomDrawer.of(context).open()
                   : Navigator.of(context).pop(),
-              child: Icon(Icons.arrow_back_ios_new, color: Colors.black)),
+              child: Icon(
+                Icons.arrow_back_ios_new,
+              )),
         ),
         body: SingleChildScrollView(
           child: Column(children: [
@@ -221,35 +223,35 @@ class _UserProfileState extends State<UserProfile> {
                   ),
 
                   //////////////////////////////
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                    height: 50,
-                    child: TextFormField(
-                      // controller: controller,
-                      validator: (val) {
-                        return null;
-                      },
-                      onSaved: (val) {
-                        setState(() {
-                          postal = val;
-                        });
-                      },
-                      initialValue: user.address != null
-                          ? user.address
-                          : 'Enter your Postal address',
-                      onChanged: (val) {
-                        setState(() {
-                          postal = val;
-                        });
-                      },
-                      decoration: InputDecoration(
-                          labelText: 'Postal Address',
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(10),
-                          )),
-                    ),
-                  ),
+                  // Container(
+                  //   margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  //   height: 50,
+                  //   child: TextFormField(
+                  //     // controller: controller,
+                  //     validator: (val) {
+                  //       return null;
+                  //     },
+                  //     onSaved: (val) {
+                  //       setState(() {
+                  //         isAdmin = val;
+                  //       });
+                  //     },
+                  //     initialValue: user.isAdmin != null
+                  //         ? user.isAdmin
+                  //         : 'Enter your Postal address',
+                  //     onChanged: (val) {
+                  //       setState(() {
+                  //         isAdmin = val;
+                  //       });
+                  //     },
+                  //     decoration: InputDecoration(
+                  //         labelText: 'Postal Address',
+                  //         border: OutlineInputBorder(
+                  //           borderSide: BorderSide(color: Colors.grey),
+                  //           borderRadius: BorderRadius.circular(10),
+                  //         )),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -263,8 +265,8 @@ class _UserProfileState extends State<UserProfile> {
                 _formKey.currentState.save();
                 authData.updateProfile(UserModel(
                   email: email,
-                  address:
-                      postal != 'Enter your Postal address' ? postal : null,
+                  isAdmin:
+                      isAdmin != 'Enter your Postal address' ? isAdmin : null,
                   dateOfBirth: dateofBirth == 'Enter your Date of birth'
                       ? null
                       : DateTime.parse(dateofBirth),

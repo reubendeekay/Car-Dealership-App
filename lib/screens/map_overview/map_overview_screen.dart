@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
+import 'package:vehicle_management/providers/dark_mode_provider.dart';
 import 'package:vehicle_management/providers/location_provider.dart';
 import 'package:vehicle_management/providers/property_provider.dart';
 import 'package:vehicle_management/screens/home/widgets/top_search.dart';
@@ -19,9 +20,14 @@ class _MapOverviewScreenState extends State<MapOverviewScreen> {
   BitmapDescriptor _markerIcon;
 
   void _onMapCreated(GoogleMapController controller) async {
+    bool isDark =
+        Provider.of<DarkThemeProvider>(context, listen: false).darkTheme;
     mapController = controller;
-    String value = await DefaultAssetBundle.of(context)
-        .loadString('assets/map_style.json');
+    String value = isDark
+        ? await DefaultAssetBundle.of(context)
+            .loadString('assets/map_dark.json')
+        : await DefaultAssetBundle.of(context)
+            .loadString('assets/map_style.json');
     mapController.setMapStyle(value);
     final properties =
         Provider.of<PropertyProvider>(context, listen: false).properties;

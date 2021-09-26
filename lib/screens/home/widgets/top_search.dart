@@ -88,25 +88,30 @@ class _TopSearchState extends State<TopSearch> {
 
   final List categories = [
     {
-      'category': 'Apartments',
+      'category': 'Sedan',
       'isSelected': false,
-      'icon': FontAwesomeIcons.archway
-    },
-    {'category': 'Cottage', 'isSelected': false, 'icon': FontAwesomeIcons.home},
-    {
-      'category': 'Hotel',
-      'isSelected': false,
-      'icon': FontAwesomeIcons.campground
+      'icon': FontAwesomeIcons.carSide
     },
     {
-      'category': 'Bungalow',
+      'category': 'Sports',
       'isSelected': false,
-      'icon': FontAwesomeIcons.university
+      'icon': FontAwesomeIcons.carSide
+    },
+    {'category': 'SUV', 'isSelected': false, 'icon': FontAwesomeIcons.carSide},
+    {
+      'category': 'Hatchback',
+      'isSelected': false,
+      'icon': FontAwesomeIcons.carSide
     },
     {
-      'category': 'Resort',
+      'category': 'Convertible',
       'isSelected': false,
-      'icon': FontAwesomeIcons.building
+      'icon': FontAwesomeIcons.carSide
+    },
+    {
+      'category': 'Mini van',
+      'isSelected': false,
+      'icon': FontAwesomeIcons.carSide
     },
   ];
 

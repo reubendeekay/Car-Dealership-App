@@ -21,11 +21,11 @@ class RecentSearches extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          search('2 Bedroom Bungalow'),
+          search('BMW X6 2014 White'),
           const SizedBox(
             height: 10,
           ),
-          search('Villa residence'),
+          search('Mercedes Benz SLK Class 2014 Silver'),
         ],
       ),
     );

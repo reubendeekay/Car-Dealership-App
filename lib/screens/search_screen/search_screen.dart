@@ -20,8 +20,8 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       appBar: ScrollAppBar(
         controller: _controller,
-        backgroundColor: Colors.grey[50],
-        iconTheme: const IconThemeData(color: Colors.black),
+        // backgroundColor: Colors.grey[50],
+        // iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
       ),
       body: SafeArea(
@@ -69,7 +69,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               color: Colors.grey[500],
                             ),
                           ),
-                          hintText: 'Search name or location',
+                          hintText: 'Search car name or yard',
                           hintStyle:
                               TextStyle(color: Colors.grey[500], fontSize: 18)),
                     ),
@@ -83,7 +83,7 @@ class _SearchScreenState extends State<SearchScreen> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 15),
                 child: const Text(
-                  'Featured Properties',
+                  'Featured Cars',
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

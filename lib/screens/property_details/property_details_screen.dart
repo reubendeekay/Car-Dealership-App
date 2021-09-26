@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vehicle_management/constants.dart';
 import 'package:vehicle_management/models/property_model.dart';
+import 'package:vehicle_management/models/vehicle_model.dart';
 import 'package:vehicle_management/screens/booking/booking_screen.dart';
 import 'package:vehicle_management/screens/property_details/widgets/details_description.dart';
 import 'package:vehicle_management/screens/property_details/widgets/details_reviews.dart';
@@ -19,7 +21,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final property = ModalRoute.of(context).settings.arguments as PropertyModel;
+    final vehicle = ModalRoute.of(context).settings.arguments as VehicleModel;
 
     return Scaffold(
       body: Container(
@@ -44,12 +46,12 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                               blurRadius: 5)
                         ])),
                     background:
-                        TopImages([property.coverImage, ...property.images]),
+                        TopImages([vehicle.coverImage, ...vehicle.images]),
                   ),
                 ),
                 SliverList(
                     delegate: SliverChildBuilderDelegate(
-                        (context, i) => DetailsBody(property),
+                        (context, i) => DetailsBody(vehicle),
                         childCount: 1))
               ],
             ),
@@ -60,12 +62,12 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                 width: size.width,
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Ksh. ${property.price}',
+                        'Ksh. ${vehicle.price}',
                         style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -136,8 +138,8 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
 }
 
 class DetailsBody extends StatefulWidget {
-  final PropertyModel property;
-  DetailsBody(this.property);
+  final VehicleModel vehicle;
+  DetailsBody(this.vehicle);
   @override
   _DetailsBodyState createState() => _DetailsBodyState();
 }
@@ -148,10 +150,10 @@ class _DetailsBodyState extends State<DetailsBody> {
   @override
   Widget build(BuildContext context) {
     List screens = [
-      DetailsDescription(widget.property),
-      PropertyReviews(
-        property: widget.property,
-      ),
+      DetailsDescription(widget.vehicle),
+      // PropertyReviews(
+      //   property: widget.vehicle,
+      // ),
     ];
     final size = MediaQuery.of(context).size;
     return Container(
@@ -161,10 +163,6 @@ class _DetailsBodyState extends State<DetailsBody> {
             topLeft: const Radius.circular(30),
             topRight: const Radius.circular(30),
           ),
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Colors.white, Colors.grey[50]]),
         ),
         width: size.width,
         child: Padding(
@@ -182,7 +180,7 @@ class _DetailsBodyState extends State<DetailsBody> {
                   width: 5,
                 ),
                 Text(
-                  '${widget.property.location.town}, ${widget.property.location.country}',
+                  '${widget.vehicle.location}',
                   style: TextStyle(
                       fontSize: 15,
                       color: Colors.grey,
@@ -196,7 +194,7 @@ class _DetailsBodyState extends State<DetailsBody> {
             Row(
               children: [
                 Text(
-                  '${widget.property.name}',
+                  '${widget.vehicle.model}',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 Spacer(),
@@ -219,7 +217,7 @@ class _DetailsBodyState extends State<DetailsBody> {
             ),
             Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
               Text(
-                'High-speed wifi',
+                'Super fast',
                 style: const TextStyle(
                     fontSize: 15,
                     color: Colors.grey,
@@ -237,7 +235,7 @@ class _DetailsBodyState extends State<DetailsBody> {
                 width: 5,
               ),
               const Text(
-                'Deskspace',
+                'Modern',
                 style: const TextStyle(
                     fontSize: 15,
                     color: Colors.grey,
@@ -255,86 +253,13 @@ class _DetailsBodyState extends State<DetailsBody> {
                 width: 5,
               ),
               const Text(
-                'Safe location',
+                'Convertible',
                 style: const TextStyle(
                     fontSize: 15,
                     color: Colors.grey,
                     fontWeight: FontWeight.w500),
               ),
             ]),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.bed,
-                      color: kPrimary,
-                      size: 30,
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      '2',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.bathtub_outlined,
-                      color: kPrimary,
-                      size: 30,
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      '1',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.room_service_outlined,
-                      color: kPrimary,
-                      size: 30,
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      '1',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                  ],
-                ),
-              ],
-            ),
             SizedBox(
               height: 15,
             ),
@@ -357,19 +282,23 @@ class _DetailsBodyState extends State<DetailsBody> {
                     child: Column(
                       children: [
                         Icon(
-                          Icons.info_outline,
+                          Icons.speed,
                           size: 30,
                           color:
                               selectedOption == 0 ? kPrimary : Colors.grey[300],
                         ),
                         Text(
-                          'Information',
+                          'Max Speed',
                           style: TextStyle(
-                              color: selectedOption == 0
-                                  ? kPrimary
-                                  : Colors.grey[300],
-                              fontWeight: FontWeight.w500),
+                              color: kPrimary, fontWeight: FontWeight.w500),
                         ),
+                        Text(
+                          '315 km/hr',
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12),
+                        )
                       ],
                     ),
                   ),
@@ -382,50 +311,65 @@ class _DetailsBodyState extends State<DetailsBody> {
                     child: Column(
                       children: [
                         Icon(
-                          Icons.comment_outlined,
+                          Icons.drive_eta_outlined,
                           size: 30,
-                          color:
-                              selectedOption == 1 ? kPrimary : Colors.grey[300],
+                          color: kPrimary,
                         ),
                         Text(
-                          'Reviews',
+                          'Mileage',
                           style: TextStyle(
-                              color: selectedOption == 1
-                                  ? kPrimary
-                                  : Colors.grey[300],
-                              fontWeight: FontWeight.w500),
+                              color: kPrimary, fontWeight: FontWeight.w500),
                         ),
+                        Text(
+                          '1000 km',
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12),
+                        )
                       ],
                     ),
                   ),
                   Column(
                     children: [
                       Icon(
-                        Icons.local_offer_outlined,
+                        Icons.bakery_dining_outlined,
                         size: 30,
-                        color: Colors.grey[300],
+                        color: kPrimary,
                       ),
                       Text(
-                        'Offers',
+                        'Horsepower',
                         style: TextStyle(
-                            color: Colors.grey[300],
-                            fontWeight: FontWeight.w500),
+                            color: kPrimary, fontWeight: FontWeight.w500),
                       ),
+                      Text(
+                        '1000 cc',
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12),
+                      )
                     ],
                   ),
                   Column(
                     children: [
                       Icon(
-                        Icons.share_outlined,
+                        Icons.local_gas_station_outlined,
                         size: 30,
-                        color: Colors.grey[300],
+                        color: kPrimary,
                       ),
                       Text(
-                        'Shared',
+                        'Fuel Type',
                         style: TextStyle(
-                            color: Colors.grey[300],
-                            fontWeight: FontWeight.w500),
+                            color: kPrimary, fontWeight: FontWeight.w500),
                       ),
+                      Text(
+                        'Diesel',
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12),
+                      )
                     ],
                   ),
                 ],

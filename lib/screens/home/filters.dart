@@ -9,12 +9,34 @@ class Filters extends StatefulWidget {
 }
 
 class _FiltersState extends State<Filters> {
-  RangeValues selectedValues = RangeValues(1000, 20000);
-  RangeValues selectedRating = RangeValues(0, 3);
+  RangeValues selectedValues = RangeValues(70000, 1000000);
+
   DateTime _startDate;
   DateTime _endDate;
+  String defaultCategory = 'All';
 
 //SELECTIONS
+
+  List<String> features = [
+    'Navigation system',
+    'Android/apple Carplay',
+    'Automatic',
+    'Manual',
+    'A/C Ventilation',
+    'Heated seats',
+    'Sunroof',
+    'Remote Start'
+  ];
+
+  List<String> categories = [
+    'All',
+    'Sedan',
+    'Sports',
+    'SUV',
+    'Hatchack'
+        'Convertible',
+    'Mini van'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +53,7 @@ class _FiltersState extends State<Filters> {
             duration: Duration(milliseconds: 500),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
@@ -47,43 +69,16 @@ class _FiltersState extends State<Filters> {
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       )),
-                  filterCategory('Rooms'),
+                  filterCategory('Features'),
                   SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        BuildOption('Any', true),
-                        Row(
-                          children: List.generate(
-                              10,
-                              (index) => Row(
-                                    children: [
-                                      BuildOption('${index + 1}', false),
-                                    ],
-                                  )),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  filterCategory('Amenities'),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                            width: 130,
-                            child: BuildOption('Swimming pool', true)),
-                        SizedBox(
-                            width: 130, child: BuildOption('Free Wifi', false)),
-                        SizedBox(
-                            width: 130,
-                            child: BuildOption('Restaurant', false)),
-                        SizedBox(
-                            width: 130, child: BuildOption('Garage', false)),
-                      ],
-                    ),
-                  ),
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(
+                            features.length,
+                            (index) => BuildOption(
+                                  features[index],
+                                )),
+                      )),
                   SizedBox(height: 15),
                   filterCategory('Availability'),
                   Row(
@@ -160,10 +155,15 @@ class _FiltersState extends State<Filters> {
                       child: DropdownButton(
                         elevation: 1,
                         dropdownColor: Colors.grey[50],
-                        style: TextStyle(fontSize: 16, color: Colors.black),
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Theme.of(context).primaryColor,
+                        ),
                         items: [
                           DropdownMenuItem(
-                            child: Text('Nairobi'),
+                            child: Text('Nairobi',
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColor)),
                           )
                         ],
                         onChanged: (value) {},
@@ -181,37 +181,31 @@ class _FiltersState extends State<Filters> {
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton(
                         elevation: 1,
-                        dropdownColor: Colors.grey[50],
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                        items: [
-                          DropdownMenuItem(
-                            child: Text('All'),
-                          )
-                        ],
-                        onChanged: (value) {},
+                        // dropdownColor: Colors.grey[50],
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                        value: defaultCategory,
+                        hint: Text('Select Category'),
+                        items: categories
+                            .map(
+                              (e) => DropdownMenuItem(
+                                child: Text(
+                                  e,
+                                ),
+                                value: e,
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            defaultCategory = value;
+                          });
+                        },
                       ),
                     ),
                   ),
                   SizedBox(height: 5),
-                  filterCategory('Rating'),
-                  SizedBox(
-                    height: 20,
-                    child: RangeSlider(
-                      values: selectedRating,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedRating = value;
-                        });
-                      },
-                      divisions: 10,
-                      activeColor: kPrimary,
-                      inactiveColor: Colors.grey[300],
-                      labels: RangeLabels(
-                          '${selectedRating.start}', '${selectedRating.end}'),
-                      min: 0,
-                      max: 5,
-                    ),
-                  ),
                   filterCategory('Price'),
                   SizedBox(
                     height: 20,
@@ -226,8 +220,8 @@ class _FiltersState extends State<Filters> {
                       inactiveColor: Colors.grey[300],
                       labels: RangeLabels(
                           '${selectedValues.start}', '${selectedValues.end}'),
-                      min: 1000,
-                      max: 50000,
+                      min: 4000,
+                      max: 5000000,
                     ),
                   ),
                   const SizedBox(height: 15),
@@ -307,40 +301,41 @@ class _FiltersState extends State<Filters> {
 
 class BuildOption extends StatefulWidget {
   final String text;
-  bool selected;
-  BuildOption(this.text, this.selected);
+  BuildOption(this.text);
 
   @override
   _BuildOptionState createState() => _BuildOptionState();
 }
 
 class _BuildOptionState extends State<BuildOption> {
+  bool selected = false;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         setState(() {
-          widget.selected = !widget.selected;
+          selected = selected;
         });
       },
       child: Container(
         height: 40,
-        width: 60,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         margin: EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
-            color: widget.selected ? kPrimary : Colors.transparent,
+            color: selected ? kPrimary : Colors.transparent,
             borderRadius: BorderRadius.all(
               Radius.circular(5),
             ),
             border: Border.all(
-              width: widget.selected ? 0 : 1,
+              width: selected ? 0 : 1,
               color: Colors.grey[300],
             )),
         child: Center(
           child: Text(
             widget.text,
             style: TextStyle(
-              color: widget.selected ? Colors.white : Colors.grey,
+              color: selected ? Colors.white : Colors.grey,
               fontSize: 14,
             ),
           ),

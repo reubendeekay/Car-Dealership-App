@@ -14,8 +14,10 @@ class NotificationsScreen extends StatelessWidget {
         appBar: ScrollAppBar(
           controller: _scrollController,
 
-          title: Text('Notifications', style: TextStyle(color: Colors.black)),
-          backgroundColor: Colors.grey[50],
+          title: Text(
+            'Notifications',
+          ),
+          // backgroundColor: Colors.grey[50],
           elevation: 0,
           actions: [
             IconButton(
@@ -33,7 +35,7 @@ class NotificationsScreen extends StatelessWidget {
             ),
           ],
           // automaticallyImplyLeading: false,
-          iconTheme: const IconThemeData(color: Colors.black),
+          // iconTheme: const IconThemeData(color: Colors.black),
         ),
         body: Snap(
           controller: _scrollController.appBar,

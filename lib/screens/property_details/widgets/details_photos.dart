@@ -15,7 +15,7 @@ class DetailsPhotos extends StatelessWidget {
             height: 25,
           ),
           Text(
-            'Photos',
+            'More Photos',
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,

@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:scroll_app_bar/scroll_app_bar.dart';
 import 'package:vehicle_management/constants.dart';
+import 'package:vehicle_management/providers/dark_mode_provider.dart';
 import 'package:vehicle_management/screens/change_password/change_password.dart';
 import 'package:vehicle_management/screens/history/history_screen.dart';
 import 'package:vehicle_management/screens/notifications/notification_settings.dart';
@@ -20,13 +22,14 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       appBar: ScrollAppBar(
           controller: _controller,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Theme.of(context).primaryColor,
           elevation: 0,
           automaticallyImplyLeading: false,
           leading: GestureDetector(
               onTap: () => ZoomDrawer.of(context).open(),
-              child:
-                  Icon(Icons.format_align_left_outlined, color: Colors.black))),
+              child: Icon(
+                Icons.format_align_left_outlined,
+              ))),
       body: Snap(
         controller: _controller.appBar,
         child: Padding(
@@ -87,6 +90,7 @@ class SettingsScreen extends StatelessWidget {
                   },
                   child: setting(
                       'Notifications', Icons.notifications_none_outlined)),
+              ChangeTheme(),
               GestureDetector(
                   onTap: () => Navigator.of(context)
                       .pushNamed(PrivacyAndSecurity.routeName),
@@ -154,6 +158,41 @@ class SettingsScreen extends StatelessWidget {
           color: Colors.grey,
           size: 16,
         ),
+        dense: true,
+      ),
+    );
+  }
+}
+
+class ChangeTheme extends StatefulWidget {
+  @override
+  _ChangeThemeState createState() => _ChangeThemeState();
+}
+
+class _ChangeThemeState extends State<ChangeTheme> {
+  @override
+  Widget build(BuildContext context) {
+    final dark = Provider.of<DarkThemeProvider>(context);
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: ListTile(
+        contentPadding: EdgeInsets.symmetric(horizontal: 0),
+        horizontalTitleGap: 0,
+        leading: Icon(dark.darkTheme
+            ? Icons.light_mode_outlined
+            : Icons.dark_mode_outlined),
+        title: Text(
+          dark.darkTheme ? 'Light mode' : 'Dark mode',
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.grey,
+          ),
+        ),
+        trailing: Switch(
+            activeColor: kPrimary,
+            value: dark.darkTheme,
+            onChanged: (value) => dark.darkTheme = value),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         dense: true,
       ),
     );

@@ -5,9 +5,10 @@ class UserModel {
   final String phoneNumber;
   final String imageUrl;
   final DateTime dateOfBirth;
-  final String address;
+  final bool isAdmin;
   final String nationalId;
   final String userId;
+  final String jobTitle;
 
   const UserModel({
     this.userId,
@@ -16,8 +17,9 @@ class UserModel {
     this.password,
     this.phoneNumber,
     this.imageUrl,
-    this.address,
+    this.isAdmin,
     this.nationalId,
     this.dateOfBirth,
+    this.jobTitle,
   });
 }

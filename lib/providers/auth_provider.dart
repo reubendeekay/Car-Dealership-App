@@ -35,9 +35,13 @@ class AuthProvider with ChangeNotifier {
         .set({
       'userId': _currentUser.user.uid,
       'email': email,
+      'isAdmin': false,
       'password': password,
       'fullName': fullName,
       'phoneNumber': phoneNumber,
+      'role': 'user',
+      'createdAt': Timestamp.now(),
+      'jobTitle': null,
       'address': null,
       'profilePic': null,
       'dateOfBirth': null,
@@ -52,13 +56,14 @@ class AuthProvider with ChangeNotifier {
         await FirebaseFirestore.instance.collection('users').doc(userId).get();
 
     _user = UserModel(
-        address: _currentUser['address'],
+        isAdmin: _currentUser['isAdmin'],
         dateOfBirth: _currentUser['dateOfBirth'],
         email: _currentUser['email'],
         fullName: _currentUser['fullName'],
         nationalId: _currentUser['nationalId'],
         phoneNumber: _currentUser['phoneNumber'],
         imageUrl: _currentUser['profilePic'],
+        jobTitle: _currentUser['jobTitle'],
         userId: _currentUser['userId'],
         password: _currentUser['password']);
 
@@ -73,7 +78,7 @@ class AuthProvider with ChangeNotifier {
       'email': user.email,
       'fullName': user.fullName,
       'phoneNumber': user.phoneNumber,
-      'address': user.address,
+      'address': user.isAdmin,
       'dateOfBirth': user.dateOfBirth == null
           ? null
           : DateFormat('dd/MM/yyyy').format(user.dateOfBirth),

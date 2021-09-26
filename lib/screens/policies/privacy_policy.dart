@@ -9,11 +9,11 @@ class PrivacyPolicy extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Privacy Policy',
-          style: TextStyle(color: Colors.black),
+          // style: TextStyle(color: Colors.black),
         ),
         elevation: 0,
-        backgroundColor: Colors.grey[50],
-        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Colors.transparent,
+        // iconTheme: IconThemeData(color: Colors.black),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
