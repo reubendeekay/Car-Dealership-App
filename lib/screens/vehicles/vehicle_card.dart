@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vehicle_management/constants.dart';
 import 'package:vehicle_management/models/property_model.dart';
 import 'package:vehicle_management/models/vehicle_model.dart';
-import 'package:vehicle_management/screens/property_details/property_details_screen.dart';
+import 'package:vehicle_management/screens/property_details/vehicle_details_screen.dart';
 import 'package:vehicle_management/widgets/cached_image.dart';
 import 'package:vehicle_management/widgets/rating_bar.dart';
 

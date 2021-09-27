@@ -7,7 +7,7 @@ import 'package:vehicle_management/providers/location_provider.dart';
 import 'package:vehicle_management/providers/property_provider.dart';
 import 'package:vehicle_management/screens/home/widgets/top_search.dart';
 import 'package:vehicle_management/screens/map_overview/map_search_screen.dart';
-import 'package:vehicle_management/screens/property_details/property_details_screen.dart';
+import 'package:vehicle_management/screens/property_details/vehicle_details_screen.dart';
 
 class MapOverviewScreen extends StatefulWidget {
   @override
@@ -37,7 +37,7 @@ class _MapOverviewScreenState extends State<MapOverviewScreen> {
         (property) => Marker(
           markerId: MarkerId(property.id),
           onTap: () => Navigator.of(context)
-              .pushNamed(PropertyDetailsScreen.routeName, arguments: property),
+              .pushNamed(VehicleDetailsScreen.routeName, arguments: property),
           icon: _markerIcon,
           position:
               LatLng(property.location.latitude, property.location.longitude),

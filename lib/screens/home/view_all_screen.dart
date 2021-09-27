@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:scroll_app_bar/scroll_app_bar.dart';
 import 'package:vehicle_management/models/property_model.dart';
-import 'package:vehicle_management/screens/property_details/property_details_screen.dart';
+import 'package:vehicle_management/screens/property_details/vehicle_details_screen.dart';
 import 'package:vehicle_management/screens/search_screen/search_screen.dart';
 import 'package:vehicle_management/widgets/cached_image.dart';
 import 'package:vehicle_management/widgets/property/properties.dart';
@@ -75,7 +75,7 @@ class ViewAllCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.of(context)
-          .pushNamed(PropertyDetailsScreen.routeName, arguments: property),
+          .pushNamed(VehicleDetailsScreen.routeName, arguments: property),
       child: Container(
         child: cachedImage(
           property.coverImage,

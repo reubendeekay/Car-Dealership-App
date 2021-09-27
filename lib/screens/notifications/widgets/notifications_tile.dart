@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:vehicle_management/constants.dart';
 
 class NotificationTile extends StatelessWidget {
+  final String title;
+  final String description;
+  final String tag;
+
+  const NotificationTile({Key key, this.title, this.description, this.tag})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -25,25 +31,25 @@ class NotificationTile extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Text(
-                        'HOT ',
+                      Text(
+                        tag,
                         style: const TextStyle(
-                            fontSize: 18,
+                            fontSize: 14,
                             fontWeight: FontWeight.w900,
                             color: kPrimary),
                       ),
                       Text(
-                        'promotion this Summer',
+                        ' $title',
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 5,
                   ),
                   Text(
-                    'All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable',
+                    description,
                     style: const TextStyle(color: Colors.grey, fontSize: 15),
                   )
                 ],

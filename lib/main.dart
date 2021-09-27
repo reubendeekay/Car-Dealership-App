@@ -16,6 +16,7 @@ import 'package:vehicle_management/screens/booking/payment_screen.dart';
 import 'package:vehicle_management/screens/change_password/change_password.dart';
 import 'package:vehicle_management/screens/chat/chat_room.dart';
 import 'package:vehicle_management/screens/dashboard/add_vehicle/add_vehicle.dart';
+import 'package:vehicle_management/screens/dashboard/add_yard/add_yard_screen.dart';
 import 'package:vehicle_management/screens/history/history_screen.dart';
 import 'package:vehicle_management/screens/home/view_all_screen.dart';
 import 'package:vehicle_management/screens/management/manage_staff.dart';
@@ -26,7 +27,7 @@ import 'package:vehicle_management/screens/policies/privacy_policy.dart';
 import 'package:vehicle_management/screens/policies/terms_of_use.dart';
 import 'package:vehicle_management/screens/privacy_security/privacy_security.dart';
 import 'package:vehicle_management/screens/profile/user_profile.dart';
-import 'package:vehicle_management/screens/property_details/property_details_screen.dart';
+import 'package:vehicle_management/screens/property_details/vehicle_details_screen.dart';
 import 'package:vehicle_management/screens/property_details/widgets/details_fullscreen.dart';
 import 'package:vehicle_management/screens/welcome/welcome_screen.dart';
 import 'package:vehicle_management/screens/search_screen/search_screen.dart';
@@ -86,8 +87,7 @@ class _MyAppState extends State<MyApp> {
           routes: {
             MyNav.routeName: (context) => MyNav(),
             MainDrawer.routeName: (context) => MainDrawer(),
-            PropertyDetailsScreen.routeName: (context) =>
-                PropertyDetailsScreen(),
+            VehicleDetailsScreen.routeName: (context) => VehicleDetailsScreen(),
             SearchScreen.routeName: (context) => SearchScreen(),
             DetailsFullScreen.routeName: (context) => DetailsFullScreen(),
             BookingScreen.routeName: (context) => BookingScreen(),
@@ -106,6 +106,7 @@ class _MyAppState extends State<MyApp> {
             HistoryScreen.routeName: (context) => HistoryScreen(),
             AddVehicle.routeName: (context) => AddVehicle(),
             ManageStaff.routeName: (context) => ManageStaff(),
+            AddYardScreen.routeName: (context) => AddYardScreen(),
           },
           onGenerateRoute: (settings) {
             switch (settings.name) {

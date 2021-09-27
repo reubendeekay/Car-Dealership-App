@@ -7,7 +7,7 @@ class YardModel {
   final String manager;
   final List<String> availableCarIds;
   final List<String> employeeIds;
-  final List<TransactionModel> transactions;
+  final List<String> transactionIds;
 
   YardModel(
       {this.name,
@@ -16,7 +16,7 @@ class YardModel {
       this.manager,
       this.availableCarIds,
       this.employeeIds,
-      this.transactions});
+      this.transactionIds});
 }
 
 class VehicleLocation {

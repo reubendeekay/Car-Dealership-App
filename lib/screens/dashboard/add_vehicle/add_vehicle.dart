@@ -9,7 +9,7 @@ import 'package:vehicle_management/models/property_model.dart';
 import 'package:vehicle_management/models/vehicle_model.dart';
 import 'package:vehicle_management/providers/location_provider.dart';
 
-import 'package:vehicle_management/screens/property_details/property_details_screen.dart';
+import 'package:vehicle_management/screens/property_details/vehicle_details_screen.dart';
 
 class AddVehicle extends StatefulWidget {
   static const routeName = '/add-property';
@@ -471,7 +471,7 @@ class _AddVehicleState extends State<AddVehicle> {
                       regNo != null &&
                       description != null) {
                     Navigator.of(context).pushNamed(
-                        PropertyDetailsScreen.routeName,
+                        VehicleDetailsScreen.routeName,
                         arguments: property);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(

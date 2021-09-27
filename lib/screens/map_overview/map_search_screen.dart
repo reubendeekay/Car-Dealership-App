@@ -19,7 +19,6 @@ class _MapSearchScreenState extends State<MapSearchScreen> {
             onPressed: () => Navigator.of(context).pop(),
             icon: const Icon(
               Icons.close,
-              color: Colors.black,
               size: 25,
             )),
       ),

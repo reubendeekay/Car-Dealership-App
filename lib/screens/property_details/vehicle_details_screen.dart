@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vehicle_management/constants.dart';
-import 'package:vehicle_management/models/property_model.dart';
 import 'package:vehicle_management/models/vehicle_model.dart';
 import 'package:vehicle_management/screens/booking/booking_screen.dart';
 import 'package:vehicle_management/screens/property_details/widgets/details_description.dart';
-import 'package:vehicle_management/screens/property_details/widgets/details_reviews.dart';
 import 'package:vehicle_management/screens/property_details/widgets/top_images.dart';
 import 'package:page_transition/page_transition.dart';
 
-class PropertyDetailsScreen extends StatefulWidget {
+class VehicleDetailsScreen extends StatefulWidget {
   static const routeName = '/property-details';
 
   @override
-  _PropertyDetailsScreenState createState() => _PropertyDetailsScreenState();
+  _VehicleDetailsScreenState createState() => _VehicleDetailsScreenState();
 }
 
-class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
+class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
   bool isLiked = false;
   @override
   Widget build(BuildContext context) {
@@ -149,12 +146,6 @@ class _DetailsBodyState extends State<DetailsBody> {
 
   @override
   Widget build(BuildContext context) {
-    List screens = [
-      DetailsDescription(widget.vehicle),
-      // PropertyReviews(
-      //   property: widget.vehicle,
-      // ),
-    ];
     final size = MediaQuery.of(context).size;
     return Container(
         // height: size.height * 0.55,
@@ -198,18 +189,16 @@ class _DetailsBodyState extends State<DetailsBody> {
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 Spacer(),
-                const Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                  size: 16,
-                ),
-                Text(
-                  '4.3 Reviews',
-                  style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w500),
-                ),
+                Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 30, vertical: 6),
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Text(
+                      'Pending',
+                      style: TextStyle(color: Colors.white),
+                    ))
               ],
             ),
             const SizedBox(
@@ -376,14 +365,79 @@ class _DetailsBodyState extends State<DetailsBody> {
               ),
             ),
             Divider(),
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 500),
-              child: screens[selectedOption],
+            SizedBox(
+              height: 10,
             ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    detail('Type', 'Used Car'),
+                    detail('Make', 'Toyota'),
+                    detail('Model', 'G-black 2014'),
+                    detail('Variant', '00XL'),
+                  ],
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Column(
+                  children: [
+                    detail('Capacity', '1920 cc'),
+                    detail('Transmission', 'Automatic'),
+                    detail('Seat Capacity', '5'),
+                    detail('Mileage', '108000'),
+                  ],
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Divider(),
+            DetailsDescription(widget.vehicle),
             SizedBox(
               height: 40,
             )
           ]),
         ));
+  }
+
+  Widget detail(String title, String value) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 5),
+      width: 180,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 90,
+              alignment: Alignment.centerLeft,
+              child: Text(
+                '$title:',
+                textAlign: TextAlign.left,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              ),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Container(
+              // width: 80,
+              alignment: Alignment.centerLeft,
+
+              child: Text(
+                value,
+                textAlign: TextAlign.left,
+                style: TextStyle(color: Colors.grey, fontSize: 15),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

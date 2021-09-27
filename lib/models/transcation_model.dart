@@ -9,6 +9,7 @@ class TransactionModel {
   final String priceSold;
   final String dateSold;
   final String profit;
+  final DateTime dateCreated;
 
   TransactionModel(
       {this.vehicleId,
@@ -20,5 +21,6 @@ class TransactionModel {
       this.buyerId,
       this.priceSold,
       this.dateSold,
+      this.dateCreated,
       this.profit});
 }

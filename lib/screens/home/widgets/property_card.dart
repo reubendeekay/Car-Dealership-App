@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vehicle_management/constants.dart';
 import 'package:vehicle_management/models/property_model.dart';
-import 'package:vehicle_management/screens/property_details/property_details_screen.dart';
+import 'package:vehicle_management/screens/property_details/vehicle_details_screen.dart';
 import 'package:vehicle_management/widgets/cached_image.dart';
 import 'package:vehicle_management/widgets/rating_bar.dart';
 
@@ -16,7 +16,7 @@ class PropertyCard extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(15, 0, 15, 10),
       child: GestureDetector(
         onTap: () => Navigator.of(context)
-            .pushNamed(PropertyDetailsScreen.routeName, arguments: property),
+            .pushNamed(VehicleDetailsScreen.routeName, arguments: property),
         child: Container(
           decoration: BoxDecoration(
               color: Colors.white,
